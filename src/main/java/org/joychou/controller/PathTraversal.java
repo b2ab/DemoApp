@@ -21,6 +21,8 @@ public class PathTraversal {
     /**
      * http://localhost:8080/path_traversal/vul?filepath=../../../../../etc/passwd
      */
+
+
     @GetMapping("/path_traversal/vul")
     public String getImage(String filepath) throws IOException {
         return getImgBase64(filepath);

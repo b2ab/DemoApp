@@ -40,6 +40,16 @@ public class SQLI {
     @Autowired
     private UserMapper userMapper;
 
+ /**
+     * vuln code
+     * http://localhost:8080/sqli/mybatis/vuln01?username=joychou' or '1'='1
+     *
+     * @param username username
+     */
+    @GetMapping("/mybatis/vuln01")
+    public List<User> mybatisVuln01(@RequestParam("username") String username) {
+        return userMapper.findByUserNameVuln01(username);
+    }
 
     /**
      * Vuln Code.
@@ -130,16 +140,7 @@ public class SQLI {
         return result.toString();
     }
 
-    /**
-     * vuln code
-     * http://localhost:8080/sqli/mybatis/vuln01?username=joychou' or '1'='1
-     *
-     * @param username username
-     */
-    @GetMapping("/mybatis/vuln01")
-    public List<User> mybatisVuln01(@RequestParam("username") String username) {
-        return userMapper.findByUserNameVuln01(username);
-    }
+   
 
     /**
      * vul code
