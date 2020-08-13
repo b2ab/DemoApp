@@ -37,31 +37,6 @@
       </div>
     </div>
     <div id="site_content">
-     <!-- <div class="sidebar">
-        // insert your sidebar items here 
-        <h3>Latest News</h3>
-        <h4>New Website Launched</h4>
-        <h5>August 1st, 2014</h5>
-        <p>2014 sees the redesign of our website. Take a look around and let us know what you think.<br /><a href="#">Read more</a></p>
-        <p></p>
-        <h4>New Website Launched</h4>
-        <h5>August 1st, 2014</h5>
-        <p>2014 sees the redesign of our website. Take a look around and let us know what you think.<br /><a href="#">Read more</a></p>
-        <h3>Useful Links</h3>
-        <ul>
-          <li><a href="#">link 1</a></li>
-          <li><a href="#">link 2</a></li>
-          <li><a href="#">link 3</a></li>
-          <li><a href="#">link 4</a></li>
-        </ul>
-        <h3>Search</h3>
-        <form method="post" action="#" id="search_form">
-          <p>
-            <input class="search" type="text" name="search_field" value="Enter keywords....." />
-            <input name="search" type="image" style="border: 0; margin: 0 0 -9px 5px;" src="style/search.png" alt="Search" title="Search" />
-          </p>
-        </form>
-      </div> -->
       <div id="content">
         <!-- insert the page content here -->
           <h1>SQL Injection</h1>
@@ -70,10 +45,32 @@
 		
        <p><b>Vulnerable Code</b></p>
 	  <center> <img src="img/sqli.jpg" alt="SQLi Code" height="350px" width="550px" /></center>
-        <ul>
-          <li><a th:href="@{sqli/mybatis/vuln01?username=joychou}">Click here to try SQL Injection attack</a></li>
-          
-        </ul>
+        <p>
+         <h2> <a th:href="@{sqli/mybatis/vuln01?username=admin' OR 1=1--}">Click here to try SQL Injection attack scenario 1</a> </h2>
+         <h2> <a th:href="@{sqli/mybatis/vuln01?username=admin' SELECT @@version--}">Click here to try SQL Injection attack scenario 2</a> </h2></p>
+        
+          <b><u>Mitigation</u></b>
+       <p>The simplest solution is to</p>
+       <p>1. Validate user inputs</p>
+       <p>2. Use PreparedStatement instead of Statement to execute the query.  </p>
+<pre>
+String query = "SELECT userName, balance "+ 
+      "FROM accounts WHERE userID = ? 
+        and password = ?"; 
+
+try { 
+PreparedStatement statement = connection.prepareStatement(query); 
+statement.setInt(1, request.getParameter("userID")); 
+ResultSet rs = statement.executeQuery(); 
+while (rs.next()) 
+{ 
+  page.addTableRow(rs.getString("userName"), 
+          rs.getFloat("balance")); 
+} 
+} catch (SQLException e) 
+  { ... } 
+
+</pre>
       </div>
     </div>
   </div>

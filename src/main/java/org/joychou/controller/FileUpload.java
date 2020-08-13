@@ -44,13 +44,14 @@ public class FileUpload {
         return "uploadPic"; // return uploadPic.html page
     }
 
-    @PostMapping("/upload")
+    @PostMapping("/upload/picture")
+    @ResponseBody
     public String singleFileUpload(@RequestParam("file") MultipartFile file,
                                    RedirectAttributes redirectAttributes) {
         if (file.isEmpty()) {
             // 赋值给uploadStatus.html里的动态参数message
             redirectAttributes.addFlashAttribute("message", "Please select a file to upload");
-            return "redirect:/file/status";
+            return "Please select a file to upload";
         }
 
         try {
@@ -61,19 +62,21 @@ public class FileUpload {
 
             redirectAttributes.addFlashAttribute("message",
                     "You successfully uploaded '" + UPLOADED_FOLDER + file.getOriginalFilename() + "'");
+          logger.info("[+] You successfully uploaded:" + UPLOADED_FOLDER + file.getOriginalFilename());
 
         } catch (IOException e) {
             redirectAttributes.addFlashAttribute("message", "upload failed");
             e.printStackTrace();
-            return "redirect:/file/status";
+            return "upload failed";
         }
 
-        return "redirect:/file/status";
+     //return "Uploaded to /tmp/";
+       return "You successfully uploaded '" + UPLOADED_FOLDER + file.getOriginalFilename() + "'";
     }
 
 
     // only upload picture
-    @PostMapping("/upload/picture")
+  /*  @PostMapping("/upload/picture")
     @ResponseBody
     public String uploadPicture(@RequestParam("file") MultipartFile multifile) throws Exception {
         if (multifile.isEmpty()) {
@@ -157,7 +160,7 @@ public class FileUpload {
             }
         }
     }
-
+*/
     /**
      * 不建议使用transferTo，因为原始的MultipartFile会被覆盖
      * https://stackoverflow.com/questions/24339990/how-to-convert-a-multipart-file-to-file

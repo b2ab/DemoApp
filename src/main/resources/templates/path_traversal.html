@@ -37,31 +37,6 @@
       </div>
     </div>
     <div id="site_content">
-     <!-- <div class="sidebar">
-        // insert your sidebar items here 
-        <h3>Latest News</h3>
-        <h4>New Website Launched</h4>
-        <h5>August 1st, 2014</h5>
-        <p>2014 sees the redesign of our website. Take a look around and let us know what you think.<br /><a href="#">Read more</a></p>
-        <p></p>
-        <h4>New Website Launched</h4>
-        <h5>August 1st, 2014</h5>
-        <p>2014 sees the redesign of our website. Take a look around and let us know what you think.<br /><a href="#">Read more</a></p>
-        <h3>Useful Links</h3>
-        <ul>
-          <li><a href="#">link 1</a></li>
-          <li><a href="#">link 2</a></li>
-          <li><a href="#">link 3</a></li>
-          <li><a href="#">link 4</a></li>
-        </ul>
-        <h3>Search</h3>
-        <form method="post" action="#" id="search_form">
-          <p>
-            <input class="search" type="text" name="search_field" value="Enter keywords....." />
-            <input name="search" type="image" style="border: 0; margin: 0 0 -9px 5px;" src="style/search.png" alt="Search" title="Search" />
-          </p>
-        </form>
-      </div> -->
       <div id="content">
         <!-- insert the page content here -->
         <h1>Path Traversal</h1>
@@ -70,10 +45,21 @@
 		
        <p><b>Vulnerable Code</b></p>
 	  <center> <img src="img/path_traversal.jpg" alt="Path Traversal" height="350px" width="550px" /></center>
-        <ul>
-          <li><a th:href="@{/path_traversal/vul?filepath=/tmp/}">Click Here to access Path Traversal attack scenario</a></li>
-          
-        </ul>
+        <p><h2><a th:href="@{/path_traversal/vul?filepath=/tmp/}">Click Here to access Path Traversal attack scenario</a></h2></p>
+         <b><u>Mitigation</u></b>
+       <p> The most effective way to prevent file path traversal vulnerabilities is to avoid passing user-supplied input to filesystem APIs altogether. </p>
+<p>
+If it is considered unavoidable to pass user-supplied input to filesystem APIs, then two layers of defense should be used together to prevent attacks:
+</p>
+<p>1 The application should validate the user input before processing it. Ideally, the validation should compare against a whitelist of permitted values. If that isn't possible for the required functionality, then the validation should verify that the input contains only permitted content, such as purely alphanumeric characters.</p>
+<p>2. After validating the supplied input, the application should append the input to the base directory and use a platform filesystem API to canonicalize the path. It should verify that the canonicalized path starts with the expected base directory. </p>
+<p>
+Below is an example of some simple Java code to validate the canonical path of a file based on user input:</p>
+<pre>
+File file = new File(BASE_DIRECTORY, userInput);
+if (file.getCanonicalPath().startsWith(BASE_DIRECTORY)){
+    // process file
+}</pre>
       </div>
     </div>
   </div>
