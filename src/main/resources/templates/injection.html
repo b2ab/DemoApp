@@ -7,6 +7,18 @@
   <meta name="keywords" content="website keywords, website keywords" />
   <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
   <link rel="stylesheet" type="text/css" href="css/style.css" title="style" />
+   <style>
+    #answer,
+#show,
+#hide:target {
+    display: none; 
+}
+
+#hide:target + #show,
+#hide:target ~ #answer {
+    display: inherit; 
+}
+  </style>
 </head>
 
 <body>
@@ -49,7 +61,11 @@
          <h2> <a th:href="@{sqli/mybatis/vuln01?username=admin' OR 1=1--}">Click here to try SQL Injection attack scenario 1</a> </h2>
          <h2> <a th:href="@{sqli/mybatis/vuln01?username=admin' SELECT @@version--}">Click here to try SQL Injection attack scenario 2</a> </h2></p>
         
-          <b><u>Mitigation</u></b>
+          <a href="#hide" id="hide">Show More</a>
+<a href="#/" id="show">Show Less</a>
+<div id="answer">
+  <p></p>
+        <b><u>Mitigation</u></b>
        <p>The simplest solution is to</p>
        <p>1. Validate user inputs</p>
        <p>2. Use PreparedStatement instead of Statement to execute the query.  </p>
@@ -71,8 +87,9 @@ while (rs.next())
   { ... } 
 
 </pre>
-      </div>
-    </div>
-  </div>
+</div>
+</div>
+</div>
+</div>
 </body>
 </html>

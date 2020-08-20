@@ -72,6 +72,7 @@ public class FileUpload {
 
      //return "Uploaded to /tmp/";
        return "You successfully uploaded '" + UPLOADED_FOLDER + file.getOriginalFilename() + "'";
+       // return "redirect:path_traversal/vul?filepath=/tmp/file.getOriginalFilename()";
     }
 
 

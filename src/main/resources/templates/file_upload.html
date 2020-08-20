@@ -7,6 +7,18 @@
   <meta name="keywords" content="website keywords, website keywords" />
   <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
   <link rel="stylesheet" type="text/css" href="css/style.css" title="style" />
+  <style>
+    #answer,
+#show,
+#hide:target {
+    display: none; 
+}
+
+#hide:target + #show,
+#hide:target ~ #answer {
+    display: inherit; 
+}
+  </style>
 </head>
 
 <body>
@@ -46,7 +58,11 @@
        <p><b>Vulnerable Code</b></p>
 	  <center><img src="img/fileupload.jpg" alt="File Upload Code" height="350px" width="550px" /></center>
         <p><h2><a th:href="@{/file/pic}">Click here to try Unrestricted File Upload attack</a></h2></p>
-         <b><u>Mitigation</u></b>
+         <a href="#hide" id="hide">Show More</a>
+<a href="#/" id="show">Show Less</a>
+<div id="answer">
+  <p></p>
+       <b><u>Mitigation</u></b>
        <p>Following steps are recommended to defend against arbitrary file upload attacks:</p>
        <p>1. The application should use a whitelist of allowed file types</p>
        <p>2. The application should use both client-side and server-side input validation to ensure evasion techniques have not been used to bypass the whitelist filter. These evasion techniques could include appending a second file type to the file name (e.g. image.jpg.php) or using trailing space or dots in the file name.</p>
@@ -107,8 +123,9 @@ public class UploadAction extends ActionSupport {
   }
 }
 </pre>
-      </div>
-    </div>
-  </div>
+</div>
+</div>
+</div>
+</div>
 </body>
 </html>

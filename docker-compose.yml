@@ -1,11 +1,12 @@
 version : '2'
 services:
     jsc:
-        image: joychou/jsc:latest
+        image: ebymohan/devsecops:deb
         ports:
             - "8080:8080"
         links:
             - j_mysql
+
 
     j_mysql:
         image: joychou/jsc_mysql:latest

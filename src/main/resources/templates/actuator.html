@@ -7,6 +7,18 @@
   <meta name="keywords" content="website keywords, website keywords" />
   <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
   <link rel="stylesheet" type="text/css" href="css/style.css" title="style" />
+  <style>
+    #answer,
+#show,
+#hide:target {
+    display: none; 
+}
+
+#hide:target + #show,
+#hide:target ~ #answer {
+    display: inherit; 
+}
+  </style>
 </head>
 
 <body>
@@ -46,6 +58,11 @@
        <p><b>Vulnerable Code</b></p>
 	  <center><img src="img/actuator.jpg " alt="Actuator Code" height="350px" width="550px" /></center>
         <p><h2><a th:href="@{/trace}">Click Here to access Actuator Endpoints</a></h2></p>
+       
+<a href="#hide" id="hide">Show More</a>
+<a href="#/" id="show">Show Less</a>
+<div id="answer">
+  <p></p>
         <b><u>Mitigation</u></b>
         <p>1. Disable unwanted endpoints</p>
        <p>2. Password Protected Actuator Endpoints </p>
@@ -59,8 +76,9 @@
   &lt;artifactId&gt;spring-boot-starter-security&lt;/artifactId&gt;
 &lt;/dependency&gt;
 </pre>
-      </div>
-    </div>
-  </div>
+</div>
+</div>
+</div>
+</div>
 </body>
 </html>
